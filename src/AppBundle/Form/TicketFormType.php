@@ -10,6 +10,10 @@ class TicketFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder
+            ->add('name')
+            ->add('first_name')
+            ->add('country');
 
     }
 

@@ -52,6 +52,7 @@ class Users
 
     /**
      * @ORM\ManyToOne(targetEntity="Orders")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $order_id;
 
