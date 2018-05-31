@@ -1,63 +1,90 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Raffi Miskdjian
- * Date: 22/05/2018
- * Time: 11:02
- */
 
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
- * @ORM\Entity
+ * Users
+ *
  * @ORM\Table(name="users")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UsersRepository")
  */
 class Users
 {
-
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", length=255)
      */
-    private $first_name;
+    private $firstName;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255)
      */
     private $country;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="birth_date", type="string", length=255)
      */
-    private $birth_date;
+    private $birthDate;
 
     /**
-     * @ORM\Column(type="string")
+     * @var bool
+     *
+     * @ORM\Column(name="reduced_price", type="boolean")
      */
-    private $reduced_price;
+    private $reducedPrice;
+
 
     /**
-     * @ORM\ManyToOne(targetEntity="Orders")
-     * @ORM\JoinColumn(nullable=false)
+     * Get id
+     *
+     * @return int
      */
-    private $order_id;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
-     * @return mixed
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Users
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
      */
     public function getName()
     {
@@ -65,31 +92,47 @@ class Users
     }
 
     /**
-     * @param mixed $name
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return Users
      */
-    public function setName($name)
+    public function setFirstName($firstName)
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get firstName
+     *
+     * @return string
      */
     public function getFirstName()
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
     /**
-     * @param mixed $first_name
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return Users
      */
-    public function setFirstName($first_name)
+    public function setCountry($country)
     {
-        $this->first_name = $first_name;
+        $this->country = $country;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get country
+     *
+     * @return string
      */
     public function getCountry()
     {
@@ -97,61 +140,51 @@ class Users
     }
 
     /**
-     * @param mixed $country
+     * Set birthDate
+     *
+     * @param string $birthDate
+     *
+     * @return Users
      */
-    public function setCountry($country)
+    public function setBirthDate($birthDate)
     {
-        $this->country = $country;
+        $this->birthDate = $birthDate;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get birthDate
+     *
+     * @return string
      */
     public function getBirthDate()
     {
-        return $this->birth_date;
+        return $this->birthDate;
     }
 
     /**
-     * @param mixed $birth_date
+     * Set reducedPrice
+     *
+     * @param boolean $reducedPrice
+     *
+     * @return Users
      */
-    public function setBirthDate($birth_date)
+    public function setReducedPrice($reducedPrice)
     {
-        $this->birth_date = $birth_date;
+        $this->reducedPrice = $reducedPrice;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get reducedPrice
+     *
+     * @return bool
      */
     public function getReducedPrice()
     {
-        return $this->reduced_price;
+        return $this->reducedPrice;
     }
-
-    /**
-     * @param mixed $reduced_price
-     */
-    public function setReducedPrice($reduced_price)
-    {
-        $this->reduced_price = $reduced_price;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrderId()
-    {
-        return $this->order_id;
-    }
-
-    /**
-     * @param mixed $order_id
-     */
-    public function setOrderId(Orders $order_id)
-    {
-        $this->order_id = $order_id;
-    }
-
-
 }
 

@@ -1,25 +1,52 @@
 <?php
 
 namespace AppBundle\Form;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class TicketFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('first_name')
-            ->add('country');
-
+            ->add('date',
+                DateType::class, [
+                    'widget' => 'single_text',
+                    'attr' => ['class' => 'js-datepicker'],
+                    'html5' => false,
+                ])
+            ->add('type',
+                ChoiceType::class, array(
+                    'choices' => array(
+                        'Journée' => 'd',
+                        'Demi-journée' => 'h',
+                    ),
+                    'expanded' => true,
+                    'multiple' => false,
+                    'label' => ' '
+                ))
+            ->add('amount',
+                ChoiceType::class, array(
+                    'choices' => array(
+                        '1' => 1,
+                        '2' => 2,
+                        '3' => 3,
+                        '4' => 4,
+                    ),
+                    'label' => 'Nombre de place',
+                ))
+            ->add('mail');
     }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {
-
+        $resolver->setDefaults([
+            'data_class' => 'AppBundle\Entity\Orders'
+        ]);
     }
 
     public function getBlockPrefix()

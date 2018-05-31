@@ -20,11 +20,13 @@ class TicketController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-            dump($form->getData());die;
+            $data=$form->getData();
         }
 
         return $this->render('ticketing/index.html.twig', [
             'ticketForm' => $form->createView()
         ]);
     }
+
+
 }

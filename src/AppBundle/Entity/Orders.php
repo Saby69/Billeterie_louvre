@@ -1,61 +1,97 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Raffi Miskdjian
- * Date: 22/05/2018
- * Time: 10:44
- */
 
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
- * @ORM\Entity
+ * Orders
+ *
  * @ORM\Table(name="orders")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OrdersRepository")
  */
 class Orders
 {
-
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;
 
     /**
-     * @ORM\Column(type="string")
+     * @var int
+     *
+     * @ORM\Column(name="amount", type="integer")
      */
     private $amount;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=255)
      */
     private $mail;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="total_price", type="string", length=255)
      */
-    private $total_price;
+    private $totalPrice;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="stripe_transaction", type="string", length=255)
      */
-    private $stripe_transaction;
+    private $stripeTransaction;
+
 
     /**
-     * @return mixed
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Orders
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -63,15 +99,23 @@ class Orders
     }
 
     /**
-     * @param mixed $date
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Orders
      */
-    public function setDate($date)
+    public function setType($type)
     {
-        $this->date = $date;
+        $this->type = $type;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get type
+     *
+     * @return string
      */
     public function getType()
     {
@@ -79,15 +123,23 @@ class Orders
     }
 
     /**
-     * @param mixed $type
+     * Set amount
+     *
+     * @param integer $amount
+     *
+     * @return Orders
      */
-    public function setType($type)
+    public function setAmount($amount)
     {
-        $this->type = $type;
+        $this->amount = $amount;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get amount
+     *
+     * @return int
      */
     public function getAmount()
     {
@@ -95,15 +147,23 @@ class Orders
     }
 
     /**
-     * @param mixed $amount
+     * Set mail
+     *
+     * @param string $mail
+     *
+     * @return Orders
      */
-    public function setAmount($amount)
+    public function setMail($mail)
     {
-        $this->amount = $amount;
+        $this->mail = $mail;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get mail
+     *
+     * @return string
      */
     public function getMail()
     {
@@ -111,44 +171,51 @@ class Orders
     }
 
     /**
-     * @param mixed $mail
+     * Set totalPrice
+     *
+     * @param string $totalPrice
+     *
+     * @return Orders
      */
-    public function setMail($mail)
+    public function setTotalPrice($totalPrice)
     {
-        $this->mail = $mail;
+        $this->totalPrice = $totalPrice;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get totalPrice
+     *
+     * @return string
      */
     public function getTotalPrice()
     {
-        return $this->total_price;
+        return $this->totalPrice;
     }
 
     /**
-     * @param mixed $total_price
+     * Set stripeTransaction
+     *
+     * @param string $stripeTransaction
+     *
+     * @return Orders
      */
-    public function setTotalPrice($total_price)
+    public function setStripeTransaction($stripeTransaction)
     {
-        $this->total_price = $total_price;
+        $this->stripeTransaction = $stripeTransaction;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get stripeTransaction
+     *
+     * @return string
      */
     public function getStripeTransaction()
     {
-        return $this->stripe_transaction;
+        return $this->stripeTransaction;
     }
-
-    /**
-     * @param mixed $stripe_transaction
-     */
-    public function setStripeTransaction($stripe_transaction)
-    {
-        $this->stripe_transaction = $stripe_transaction;
-    }
-
-
 }
+
