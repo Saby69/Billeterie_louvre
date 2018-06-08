@@ -5,12 +5,14 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Users
+ * Information
  *
- * @ORM\Table(name="users")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UsersRepository")
+ * @ORM\Table(name="information")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\InformationRepository")
  */
-class Users
+
+
+class Information
 {
     /**
      * @var int
@@ -43,9 +45,9 @@ class Users
     private $country;
 
     /**
-     * @var string
+     * @@var \DateTime
      *
-     * @ORM\Column(name="birth_date", type="string", length=255)
+     * @ORM\Column(name="birth_date", type="datetime")
      */
     private $birthDate;
 
@@ -55,6 +57,11 @@ class Users
      * @ORM\Column(name="reduced_price", type="boolean")
      */
     private $reducedPrice;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Booking", cascade={"persist"})
+     */
+    private $booking;
 
 
     /**
@@ -72,7 +79,7 @@ class Users
      *
      * @param string $name
      *
-     * @return Users
+     * @return Information
      */
     public function setName($name)
     {
@@ -96,7 +103,7 @@ class Users
      *
      * @param string $firstName
      *
-     * @return Users
+     * @return Information
      */
     public function setFirstName($firstName)
     {
@@ -120,7 +127,7 @@ class Users
      *
      * @param string $country
      *
-     * @return Users
+     * @return Information
      */
     public function setCountry($country)
     {
@@ -144,7 +151,7 @@ class Users
      *
      * @param string $birthDate
      *
-     * @return Users
+     * @return Information
      */
     public function setBirthDate($birthDate)
     {
@@ -168,7 +175,7 @@ class Users
      *
      * @param boolean $reducedPrice
      *
-     * @return Users
+     * @return Information
      */
     public function setReducedPrice($reducedPrice)
     {
@@ -185,6 +192,22 @@ class Users
     public function getReducedPrice()
     {
         return $this->reducedPrice;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBooking()
+    {
+        return $this->booking;
+    }
+
+    /**
+     * @param mixed $booking
+     */
+    public function setBooking(Booking $booking)
+    {
+        $this->booking = $booking;
     }
 }
 

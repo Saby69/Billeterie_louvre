@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Orders
+ * Booking
  *
- * @ORM\Table(name="orders")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\OrdersRepository")
+ * @ORM\Table(name="booking")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BookingRepository")
  */
-class Orders
+class Booking
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class Orders
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="datetime", nullable=true)
      */
     private $date;
 
@@ -52,16 +52,19 @@ class Orders
     /**
      * @var string
      *
-     * @ORM\Column(name="total_price", type="string", length=255)
+     * @ORM\Column(name="total_price", type="string", length=255, nullable=true)
      */
     private $totalPrice;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="stripe_transaction", type="string", length=255)
+     * @ORM\Column(name="stripe_transaction", type="string", length=255, nullable=true)
      */
     private $stripeTransaction;
+
+
+
 
 
     /**
@@ -79,7 +82,7 @@ class Orders
      *
      * @param \DateTime $date
      *
-     * @return Orders
+     * @return Booking
      */
     public function setDate($date)
     {
@@ -103,7 +106,7 @@ class Orders
      *
      * @param string $type
      *
-     * @return Orders
+     * @return Booking
      */
     public function setType($type)
     {
@@ -127,7 +130,7 @@ class Orders
      *
      * @param integer $amount
      *
-     * @return Orders
+     * @return Booking
      */
     public function setAmount($amount)
     {
@@ -151,7 +154,7 @@ class Orders
      *
      * @param string $mail
      *
-     * @return Orders
+     * @return Booking
      */
     public function setMail($mail)
     {
@@ -175,7 +178,7 @@ class Orders
      *
      * @param string $totalPrice
      *
-     * @return Orders
+     * @return Booking
      */
     public function setTotalPrice($totalPrice)
     {
@@ -191,6 +194,10 @@ class Orders
      */
     public function getTotalPrice()
     {
+        /* fonction touvée dans OC pour calculer le prix total de la commande
+        $prix = 0;
+        foreach($this->getListeProduits() as $produit) {
+            $prix += $produit->getPrix();*/
         return $this->totalPrice;
     }
 
@@ -199,7 +206,7 @@ class Orders
      *
      * @param string $stripeTransaction
      *
-     * @return Orders
+     * @return Booking
      */
     public function setStripeTransaction($stripeTransaction)
     {

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue sur la billeterie du Louvre ! {% endblock %}
+{% block title %}Bienvenue sur la billetterie du Louvre ! {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,20 +9,6 @@
 
 {% block body %}
 
-    <!-- Page Header -->
-    <header class="masthead" style="background-image: url('img/louvre-accueil-louvre-abu-dhabi.jpg')">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="site-heading">
-                        <h1>Billeterie</h1>
-                        <span class="subheading">du Louvre</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
 
     <!-- Main Content -->
     <div class="container">
@@ -46,7 +32,8 @@
 
 {% block javascripts %}
         {{ parent() }}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js " charset="UTF-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.fr.min.js"></script>
 
         <script>
             jQuery(document).ready(function() {
@@ -56,12 +43,7 @@
                     daysOfWeekDisabled: [0,2,],
                     daysOfWeekHighlighted: [0,6],
                     datesDisabled: ['2018/05/01','2018/11/01','2018/12/25','2019/05/01','2019/11/01','2019/12/25','2020/05/01','2020/11/01','2020/12/25','2021/05/01','2021/11/01','2021/12/25'],
-                    days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-                    daysShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-                    daysMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-                    months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-                    monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-                    today: "Aujourd'hui",
+                    startDate: 'd',
                     titleFormat: "mm yy", /* Leverages same syntax as 'format' */
                     weekStart: 1,
                     language: 'fr',
