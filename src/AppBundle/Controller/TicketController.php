@@ -43,16 +43,14 @@ class TicketController extends Controller
     public function infosAction(Request $request)
     {
         $information = new Information();
-        $booking = new Booking();
-        /*$information->setBooking($booking);*/
+        /*$booking = new Booking();
+        $information->setBooking($booking);*/
         $form = $this->createForm(InformationType::class, $information);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $em = $this->getDoctrine()->getManager()->getRepository('AppBundle:Information');
-            $informations = $this->getInformationWithBooking();
-            $informations = $repository->findAll();
-            $em->persist($informations);
+            $data = $form->getData();
+            $em = $this->getDoctrine()->getManager()/*->getRepository('AppBundle:Information')->findAll()*/;
+            $em->persist($data);
             $em->flush();
             return $this->redirectToRoute('orderdetails');
 

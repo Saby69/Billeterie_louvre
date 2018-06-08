@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,6 +63,17 @@ class Booking
      * @ORM\Column(name="stripe_transaction", type="string", length=255, nullable=true)
      */
     private $stripeTransaction;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Information", mappedBy="booking")
+     */
+    private $informations;
+
+    public function __construct()
+    {
+        $this->informations = new ArrayCollection();
+    }
 
 
 
@@ -224,5 +236,22 @@ class Booking
     {
         return $this->stripeTransaction;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getInformations()
+    {
+        return $this->informations;
+    }
+
+    /**
+     * @param mixed $informations
+     */
+    public function setInformations($informations)
+    {
+        $this->informations = $informations;
+    }
+
 }
 

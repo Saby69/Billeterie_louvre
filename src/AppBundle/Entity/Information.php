@@ -59,7 +59,8 @@ class Information
     private $reducedPrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Booking", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Booking", inversedBy="Information", cascade={"persist"})
+     * @ORM\JoinColumn(name="booking_id", referencedColumnName="id")
      */
     private $booking;
 
@@ -209,5 +210,7 @@ class Information
     {
         $this->booking = $booking;
     }
+
+
 }
 
