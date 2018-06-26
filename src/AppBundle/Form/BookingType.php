@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+
 class BookingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -46,9 +47,9 @@ class BookingType extends AbstractType
     }
 
 
-    public function configureOptions(OptionsResolver $resolver)
+  /*  public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
+        /*$resolver->setDefaults([
             'data_class' => 'AppBundle\Entity\Booking'
         ]);
     }
@@ -56,5 +57,5 @@ class BookingType extends AbstractType
     public function getBlockPrefix()
     {
         return 'app_bundle_ticket_form_type';
-    }
+    }*/
 }

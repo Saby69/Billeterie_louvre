@@ -2,7 +2,11 @@
 
 namespace AppBundle\Entity;
 
+
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 /**
  * Information
@@ -59,16 +63,22 @@ class Information
     private $reducedPrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Booking", inversedBy="Information", cascade={"persist"})
-     * @ORM\JoinColumn(name="booking_id", referencedColumnName="id")
-     */
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Booking", inversedBy="informations")
+     * @ORM\JoinColumn(name="booking_id", referencedColumnName="id", nullable=false)
+    */
     private $booking;
+
+
+
+
+
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -150,7 +160,7 @@ class Information
     /**
      * Set birthDate
      *
-     * @param string $birthDate
+     * @param \DateTime $birthDate
      *
      * @return Information
      */
@@ -164,7 +174,7 @@ class Information
     /**
      * Get birthDate
      *
-     * @return string
+     * @return \DateTime
      */
     public function getBirthDate()
     {
@@ -188,7 +198,7 @@ class Information
     /**
      * Get reducedPrice
      *
-     * @return bool
+     * @return boolean
      */
     public function getReducedPrice()
     {
@@ -196,21 +206,34 @@ class Information
     }
 
     /**
-     * @return mixed
+     * Set booking
+     *
+     * @param \AppBundle\Entity\Booking $booking
+     *
+     * @return Information
+     */
+    public function setBooking(\AppBundle\Entity\Booking $booking)
+    {
+        $this->booking = $booking;
+
+        return $this;
+    }
+
+    /**
+     * Get booking
+     *
+     * @return \AppBundle\Entity\Booking
      */
     public function getBooking()
     {
         return $this->booking;
     }
 
-    /**
-     * @param mixed $booking
-     */
-    public function setBooking(Booking $booking)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $this->booking = $booking;
+        $resolver->setDefaults(array(
+            'data_class' => Information::class,
+        ));
     }
-
-
 }
 

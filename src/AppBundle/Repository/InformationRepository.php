@@ -10,17 +10,5 @@ namespace AppBundle\Repository;
  */
 class InformationRepository extends \Doctrine\ORM\EntityRepository
 {
-   /* public function getInformationWithBooking()
-    {
-        $qb = $this
-            ->createQueryBuilder('i')
-            ->leftJoin('i.booking', 'book')
-            ->addSelect('book')
-        ;
 
-        return $qb
-            ->getQuery()
-            ->getResult()
-            ;
-    }*/
 }

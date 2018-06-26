@@ -2,8 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Booking
@@ -66,23 +67,26 @@ class Booking
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Information", mappedBy="booking")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Information" , mappedBy="booking", cascade={"persist"})
      */
     private $informations;
-
-    public function __construct()
-    {
-        $this->informations = new ArrayCollection();
-    }
 
 
 
 
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->informations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -154,7 +158,7 @@ class Booking
     /**
      * Get amount
      *
-     * @return int
+     * @return integer
      */
     public function getAmount()
     {
@@ -206,10 +210,6 @@ class Booking
      */
     public function getTotalPrice()
     {
-        /* fonction touvée dans OC pour calculer le prix total de la commande
-        $prix = 0;
-        foreach($this->getListeProduits() as $produit) {
-            $prix += $produit->getPrix();*/
         return $this->totalPrice;
     }
 
@@ -238,14 +238,6 @@ class Booking
     }
 
     /**
-     * @return mixed
-     */
-    public function getInformations()
-    {
-        return $this->informations;
-    }
-
-    /**
      * @param mixed $informations
      */
     public function setInformations($informations)
@@ -253,5 +245,40 @@ class Booking
         $this->informations = $informations;
     }
 
-}
+    /**
+     * Add information
+     *
+     * @param \AppBundle\Entity\Information $information
+     *
+     * @return Booking
+     */
+    public function addInformation(\AppBundle\Entity\Information $information)
+    {
+        $this->informations[] = $information;
+        $information->setBooking($this);
 
+        return $this;
+    }
+
+
+
+    /**
+     * Remove information
+     *
+     * @param \AppBundle\Entity\Information $information
+     */
+    public function removeInformation(\AppBundle\Entity\Information $information)
+    {
+        $this->informations->removeElement($information);
+    }
+
+    /**
+     * Get informations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInformations()
+    {
+        return $this->informations;
+    }
+}

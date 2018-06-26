@@ -12,12 +12,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
+
+
                 {{ form_start(ticketForm) }}
-                    {{ form_row(ticketForm.name) }}
-                    {{ form_row(ticketForm.first_name) }}
-                    {{ form_row(ticketForm.country) }}
-                    {{ form_row(ticketForm.birth_date) }}
-                    {{ form_row(ticketForm.reduced_price) }}
+
+                    {% for information in ticketForm %}
+
+                        {{ form_widget(information) }}
+
+                    {%  endfor %}
+
+
 
 
                     <button type="submit" class="btn btn-success">Valider</button>

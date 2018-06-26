@@ -1,18 +1,16 @@
 <?php
 
 namespace AppBundle\Form;
+use AppBundle\Entity\Information;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-/**
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BookingRepository")
- * @ORM\Table(name="Booking")
- */
+
 class InformationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -31,8 +29,9 @@ class InformationType extends AbstractType
                     'label' => 'Pays',
                 ])
             ->add('birth_date',
-                    DateType::class, [
+                    BirthdayType::class, [
                     'label' => 'Date de naissance',
+                    'format' => 'dd MM yyyy',
                  ])
             ->add('reduced_price',
                 ChoiceType::class, array(
@@ -49,7 +48,9 @@ class InformationType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-
+        $resolver->setDefaults(array(
+            'data_class' => Information::class,
+        ));
     }
 
     public function getBlockPrefix()
