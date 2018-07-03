@@ -17,6 +17,7 @@ class BookingType extends AbstractType
             ->add('date',
                 DateType::class, [
                     'widget' => 'single_text',
+                    'format' => 'dd-mm-yyyy',
                     'attr' => ['class' => 'js-datepicker'],
                     'html5' => false,
                 ])
@@ -39,6 +40,11 @@ class BookingType extends AbstractType
                         '4' => 4,
                     ),
                     'label' => 'Nombre de place',
+                    'placeholder' => 'Choisir un nombre de place',
+
+
+
+
                 ))
             ->add('mail',
                 EmailType::class, array(

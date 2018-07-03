@@ -3,9 +3,11 @@
 namespace AppBundle\Entity;
 
 
-use Doctrine\Common\Collections\ArrayCollection;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 /**
@@ -31,6 +33,7 @@ class Information
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *  @Assert\NotBlank(message = "Veuillez entrer un nom")
      */
     private $name;
 
@@ -38,6 +41,7 @@ class Information
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=255)
+     * @Assert\NotBlank(message = "Veuillez entrer un prénom")
      */
     private $firstName;
 
@@ -45,6 +49,7 @@ class Information
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=255)
+     * @Assert\NotBlank(message = "Veuillez sélectionner un pays")
      */
     private $country;
 
@@ -52,6 +57,7 @@ class Information
      * @@var \DateTime
      *
      * @ORM\Column(name="birth_date", type="datetime")
+     * @Assert\NotBlank(message = "Veuillez entrer une date de naissance")
      */
     private $birthDate;
 
@@ -59,6 +65,7 @@ class Information
      * @var bool
      *
      * @ORM\Column(name="reduced_price", type="boolean")
+     *
      */
     private $reducedPrice;
 

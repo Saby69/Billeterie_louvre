@@ -12,6 +12,8 @@
 
     <!-- Main Content -->
     <div class="container">
+        <h2>Billet d'entrée</h2>
+        <p>Veuillez remplir le formulaire ci-dessous</p>
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 {{ form_start(ticketForm) }}
@@ -39,7 +41,7 @@
             jQuery(document).ready(function() {
                 $('.js-datepicker').datepicker(
                     {
-                    format:'yyyy-mm-dd',
+                    format:'dd-mm-yyyy',
                     daysOfWeekDisabled: [0,2,],
                     daysOfWeekHighlighted: [0,6],
                     datesDisabled: ['2018/05/01','2018/11/01','2018/12/25','2019/05/01','2019/11/01','2019/12/25','2020/05/01','2020/11/01','2020/12/25','2021/05/01','2021/11/01','2021/12/25'],

@@ -6,6 +6,7 @@ use AppBundle\Entity\Booking;
 use AppBundle\Entity\Information;
 use AppBundle\Form\InformationType;
 use AppBundle\Form\BookingType;
+use AppBundle\Services\Calculator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -23,20 +24,12 @@ class TicketController extends Controller
     {
         $session = $request->getSession();
         $booking = new Booking();
-
         $form = $this->createForm(BookingType::class, $booking);
-
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-
             $session->set('booking', $booking);
-
             return $this->redirectToRoute('infos');
-
         }
-
 
         return $this->render('ticketing/index.html.twig', [
             'ticketForm' => $form->createView()
@@ -48,6 +41,7 @@ class TicketController extends Controller
      */
     public function infosAction(Request $request)
     {
+
         $booking = $request->getSession()->get('booking');
 
         if(!empty($booking)) {
@@ -59,9 +53,9 @@ class TicketController extends Controller
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+
+
                 $em = $this->getDoctrine()->getManager();
-
-
                 foreach($informations as $information)
                 {
                     $booking->addInformation($information);
@@ -73,9 +67,7 @@ class TicketController extends Controller
             }
             return $this->render('ticketing/form_information.html.twig', [
                 'ticketForm' => $form->createView()
-
             ]);
-
         }
         return $this->redirectToRoute("index");
 
@@ -84,11 +76,17 @@ class TicketController extends Controller
     /**
      * @Route("/orderdetails", name="orderdetails")
      */
-    public function orderdetailsAction()
+    public function orderdetailsAction(Calculator $calculator)
     {
-        return $this->render('ticketing/orderdetails.html.twig');
+
+        $calculator = new Calculator();
+        $calculator->recoverTicket();
+        return $this->render('ticketing/orderdetails.html.twig', [
+            'calculators' => $calculator,
+        ]);
     }
 
+    //Integration stripe
     /**
      * @Route("/stripe", name="stripe")
      */
@@ -96,17 +94,6 @@ class TicketController extends Controller
     {
         return $this->render('ticketing/stripe.html.twig');
     }
-
-    /**
-     * @Route(
-     *     "/checkout",
-     *     name="order_checkout",
-     *     methods="POST"
-     * )
-     */
-    public function checkoutAction(Request $request)
-    {
-        <?php
 
  /**
   * @Route(
@@ -139,7 +126,7 @@ class TicketController extends Controller
             // The card has been declined
         }
     }
-    }
+    //fin integration stripe
 
     }
 

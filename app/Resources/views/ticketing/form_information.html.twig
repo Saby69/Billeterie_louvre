@@ -11,19 +11,19 @@
     <!-- Main Content -->
     <div class="container">
         <div class="row">
+            <h2>Vos informations</h2>
+            <p>Veuillez remplir le(s) champ(s) ci-dessous afin de procéder au calcul du montant de votre commande</p>
             <div class="col-lg-8 col-md-10 mx-auto">
 
 
                 {{ form_start(ticketForm) }}
 
                     {% for information in ticketForm %}
-
+                        <hr WIDTH="50%" SIZE="2" ALIGN="left" color="blue">
                         {{ form_widget(information) }}
 
+
                     {%  endfor %}
-
-
-
 
                     <button type="submit" class="btn btn-success">Valider</button>
                 {{ form_end(ticketForm) }}

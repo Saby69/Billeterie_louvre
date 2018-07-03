@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Booking
@@ -27,6 +27,8 @@ class Booking
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime", nullable=true)
+     * @Assert\NotBlank(message = "Veuillez choisir une date")
+     * @Assert\Date
      */
     private $date;
 
@@ -34,6 +36,7 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
+     * @Assert\NotBlank(message = "Veuillez choisir si vous souhaitez une entée pour la journée ou demi-journée")
      */
     private $type;
 
@@ -41,6 +44,7 @@ class Booking
      * @var int
      *
      * @ORM\Column(name="amount", type="integer")
+     * @Assert\NotBlank(message = "Veuillez sélectionner un nombre de place")
      */
     private $amount;
 
@@ -48,6 +52,7 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $mail;
 
