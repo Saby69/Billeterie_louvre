@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as BookingAssert;
 
 /**
  * Booking
@@ -26,9 +27,10 @@ class Booking
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=true)
+     * @ORM\Column(name="date", type="date", nullable=true)
      * @Assert\NotBlank(message = "Veuillez choisir une date")
-     * @Assert\Date
+     * @Assert\GreaterThanOrEqual("today utc", message="Impossible de choisir une date antérieur à aujourd'hui")
+     * @BookingAssert\IsHolidays()
      */
     private $date;
 
@@ -36,7 +38,7 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
-     * @Assert\NotBlank(message = "Veuillez choisir si vous souhaitez une entée pour la journée ou demi-journée")
+     * @Assert\NotBlank(message = "Veuillez choisir si vous souhaitez une entrée pour la journée ou la demi-journée")
      */
     private $type;
 

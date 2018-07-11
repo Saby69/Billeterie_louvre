@@ -56,7 +56,7 @@ class Information
     /**
      * @@var \DateTime
      *
-     * @ORM\Column(name="birth_date", type="datetime")
+     * @ORM\Column(name="birth_date", type="date")
      * @Assert\NotBlank(message = "Veuillez entrer une date de naissance")
      */
     private $birthDate;
