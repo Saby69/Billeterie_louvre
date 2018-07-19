@@ -17,7 +17,11 @@ use Symfony\Component\Validator\Constraint;
  */
 class IsHolidays extends Constraint
 {
-    public $message = 'Désolé, nous sommes fermés ce jour là, veuillez choisir une autre date.';
+    public $sunday = 'Le Louvre est fermé le dimanche.';
+    public $tuesday = 'Le Louvre est fermé le mardi.';
+    public $firstmay = 'Le Louvre est fermé le 1er mai.';
+    public $firstnovember = 'Le Louvre est fermé le 1er novembre.';
+    public $christmas = 'Le Louvre est fermé pour Noël.';
 
 
 }

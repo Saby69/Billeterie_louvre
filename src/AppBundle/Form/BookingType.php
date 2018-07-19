@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Form;
+use AppBundle\Entity\Booking;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -17,9 +18,10 @@ class BookingType extends AbstractType
             ->add('date',
                 DateType::class, [
                     'widget' => 'single_text',
-                    'format' => 'dd-mm-yyyy',
+                    'format' => 'dd/MM/yyyy',
                     'attr' => ['class' => 'js-datepicker'],
                     'html5' => false,
+                    'model_timezone' => 'Europe/Paris'
                 ])
             ->add('type',
                 ChoiceType::class, array(
@@ -53,15 +55,15 @@ class BookingType extends AbstractType
     }
 
 
-  /*  public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        /*$resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Booking'
+        $resolver->setDefaults([
+            'data_class' => Booking::class,
         ]);
     }
 
     public function getBlockPrefix()
     {
         return 'app_bundle_ticket_form_type';
-    }*/
+    }
 }

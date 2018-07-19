@@ -33,7 +33,13 @@ class Information
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     *  @Assert\NotBlank(message = "Veuillez entrer un nom")
+     * @Assert\NotBlank(message = "Veuillez saisir votre nom !")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Votre nom doit contenir plus de {{ limit }} caractères !",
+     *      maxMessage = "Votre nom doit contenir moins de {{ limit }} caractères !"
+     * )
      */
     private $name;
 
@@ -41,15 +47,22 @@ class Information
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=255)
-     * @Assert\NotBlank(message = "Veuillez entrer un prénom")
+     * @Assert\NotBlank(message = "Veuillez saisir votre prénom")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Votre prénom doit contenir plus de {{ limit }} caractères !",
+     *      maxMessage = "Votre prénom doit contenir moins de {{ limit }} caractères !"
+     * )
      */
+
     private $firstName;
 
     /**
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=255)
-     * @Assert\NotBlank(message = "Veuillez sélectionner un pays")
+     * @Assert\NotBlank(message = "Veuillez sélectionner un pays !")
      */
     private $country;
 
@@ -57,7 +70,9 @@ class Information
      * @@var \DateTime
      *
      * @ORM\Column(name="birth_date", type="date")
-     * @Assert\NotBlank(message = "Veuillez entrer une date de naissance")
+     * @Assert\NotBlank(message = "Veuillez saisir votre date de naissance")
+     * @Assert\LessThanOrEqual("today", message="Impossible de choisir une date supérieur à aujourd'hui !")
+
      */
     private $birthDate;
 

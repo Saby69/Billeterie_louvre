@@ -9,26 +9,33 @@
 namespace AppBundle\Validator\Constraints;
 
 
+
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class TypeTicketValidator extends ConstraintValidator
 {
+
     public function validate($value, Constraint $constraint)
     {
-        $value = new \DateTime();
+
+        date_default_timezone_set('Europe/Paris');
+        //Récupération de l'heure
+        $hour = date('H');
+        //Récupération de la date de réservation
+        $booking = $this->context->getObject();
+        $visitday = $booking->getDate();
+        //Récupération de la date du jour
+        $day = new \DateTime("NOW");
 
 
-        if(!empty($value) && $value== "d") {
-            // Récupération de l'heure
-            date_default_timezone_set('Europe/Paris');
-            $hour = date('H');
-            // Test de l'heure pour le billet journée
-            if ($hour >= 14) {
-                // erreur si l'heure est supérieure à 14 h
-                $this->context->buildViolation($constraint->message)
-                    ->addViolation();
-            }
+        //Contrainte qui vérifie que c'est aujourd'hui, qu'il est plus de 14h et que le type journée à été sélectionné
+        if($visitday < $day && $hour >= "04" && $value == "d") {
+            $this->context->buildViolation($constraint->message)
+                ->addViolation();
+
+
+
         }
     }
 

@@ -29,8 +29,9 @@ class Booking
      *
      * @ORM\Column(name="date", type="date", nullable=true)
      * @Assert\NotBlank(message = "Veuillez choisir une date")
-     * @Assert\GreaterThanOrEqual("today utc", message="Impossible de choisir une date antérieur à aujourd'hui")
+     * @Assert\GreaterThanOrEqual("today", message="Impossible de choisir une date antérieur à aujourd'hui !")
      * @BookingAssert\IsHolidays()
+     * @BookingAssert\NumberMaxTickets()
      */
     private $date;
 
@@ -38,7 +39,8 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
-     * @Assert\NotBlank(message = "Veuillez choisir si vous souhaitez une entrée pour la journée ou la demi-journée")
+     * @Assert\NotBlank(message = "Veuillez choisir si vous souhaitez une entrée pour la journée ou la demi-journée !")
+     * @BookingAssert\TypeTicket()
      */
     private $type;
 
@@ -46,7 +48,7 @@ class Booking
      * @var int
      *
      * @ORM\Column(name="amount", type="integer")
-     * @Assert\NotBlank(message = "Veuillez sélectionner un nombre de place")
+     * @Assert\NotBlank(message = "Veuillez sélectionner un nombre de place !")
      */
     private $amount;
 
@@ -54,7 +56,8 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Veuillez saisir une adresse mail !")
+     * @Assert\Email(message = "Veuillez saisir une adresse mail valide !")
      */
     private $mail;
 

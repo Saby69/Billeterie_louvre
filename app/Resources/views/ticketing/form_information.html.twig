@@ -18,12 +18,16 @@
 
                 {{ form_start(ticketForm) }}
 
+                {{ form_errors(ticketForm) }}
                     {% for information in ticketForm %}
-                        <hr WIDTH="50%" SIZE="2" ALIGN="left" color="blue">
-                        {{ form_widget(information) }}
+
+                        <tr><td>{{ form_widget(information) }}</td>
+                        <td><hr WIDTH="50%" SIZE="2" ALIGN="left" color="pink"></td>
+                        </tr>
 
 
                     {%  endfor %}
+
 
                     <button type="submit" class="btn btn-success">Valider</button>
                 {{ form_end(ticketForm) }}

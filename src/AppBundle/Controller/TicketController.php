@@ -27,6 +27,7 @@ class TicketController extends Controller
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
+        dump($form->getData());
         if ($form->isSubmitted() && $form->isValid()) {
             $session->set('booking', $booking);
             return $this->redirectToRoute('infos');
@@ -67,7 +68,7 @@ class TicketController extends Controller
                 return $this->redirectToRoute('orderdetails');
             }
             return $this->render('ticketing/form_information.html.twig', [
-                'ticketForm' => $form->createView()
+                'booking' => $booking, 'ticketForm' => $form->createView()
             ]);
         }
         return $this->redirectToRoute("index");
@@ -79,12 +80,12 @@ class TicketController extends Controller
      */
     public function orderdetailsAction(Calculator $calculator)
     {
+        $em = $this->getDoctrine()->getManager();
+        $date = new \DateTime('2018-07-25');
+        $numberticket = $em->getRepository('AppBundle:Booking') -> findNumberTicketOneDate($date);
+        dump($numberticket);
 
-        $calculator = new Calculator();
-        $calculator->recoverTicket();
-        return $this->render('ticketing/orderdetails.html.twig', [
-            'calculators' => $calculator,
-        ]);
+        return $this->render('ticketing/orderdetails.html.twig');
     }
 
     //Integration stripe

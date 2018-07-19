@@ -11,4 +11,13 @@ namespace AppBundle\Repository;
 class InformationRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    public function findNames()
+    {
+        $qb = $this->createQueryBuilder('i');
+        $qb
+            ->where('i.name = :name');
+        $qb->getQuery();
+
+        return $qb;
+    }
 }
