@@ -21,9 +21,15 @@
                 {{ form_errors(ticketForm) }}
                     {% for information in ticketForm %}
 
-                        <tr><td>{{ form_widget(information) }}</td>
-                        <td><hr WIDTH="50%" SIZE="2" ALIGN="left" color="pink"></td>
+                        <table>
+                        <tr>
+                            <td>
+                                {{ form_widget(information) }}
+                            </td>
+
                         </tr>
+                        </table>
+                        <hr WIDTH="50%" SIZE="2" ALIGN="left" color="pink">
 
 
                     {%  endfor %}
@@ -35,8 +41,6 @@
 
         </div>
     </div>
-
-    <hr>
 
 {% endblock %}
 

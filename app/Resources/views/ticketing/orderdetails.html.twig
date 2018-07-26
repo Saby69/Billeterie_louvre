@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Informations visiteur {% endblock %}
+{% block title %}Récapitulatif de la commande {% endblock %}
 
 
 
@@ -18,7 +18,23 @@
             {% endfor %}
         </div>#}
         <div class="col-lg-8 col-md-10 mx-auto">
+            <h1>Récapitulatif de la commande</h1>
+            <p>Vous avez réservez {{ booking.amount }} place(s) pour une {{ booking.type }} pour le</p>
+          {% for b in booking.informations %}
+              <table>
 
+                  <tr>
+                      <td>
+                          {{ b.name }} né(e) le
+                          {{ b.firstName }} <br>
+                          Pays : {{ b.country }} <br>
+                          Réduction : {% if ({{ b.reducedPrice }}==0){echo "non"}%}<br><br>
+
+                      </td>
+                  </tr>
+              </table>
+
+            {% endfor %}
 
         </div>
     </div>
@@ -33,7 +49,7 @@
     </div>
 </div>
 
-    <hr>
+
 
     {% endblock %}
 

@@ -85,13 +85,7 @@ class Booking
 
 
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->informations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
 
     /**
      * Get id
