@@ -19,16 +19,15 @@
         </div>#}
         <div class="col-lg-8 col-md-10 mx-auto">
             <h1>Récapitulatif de la commande</h1>
-            <p>Vous avez réservez {{ booking.amount }} place(s) pour une {{ booking.type }} pour le</p>
+            <p>Vous avez réservez {{ booking.amount }} place(s) pour une {% if  booking.type == 'd' %} journée {% else %} demi-journée {%  endif %} pour le {{ booking.date|date("d m Y", "Europe/Paris") }}</p>
           {% for b in booking.informations %}
               <table>
 
                   <tr>
                       <td>
-                          {{ b.name }} né(e) le
-                          {{ b.firstName }} <br>
-                          Pays : {{ b.country }} <br>
-                          Réduction : {% if ({{ b.reducedPrice }}==0){echo "non"}%}<br><br>
+                          {{ b.name }} {{ b.firstName }} <br>
+                          né(e) le {{ b.birthDate|date("d-m-y", "Europe/Paris") }} <br>
+                          Réduction : {% if b.reducedPrice == '0'%} non {% else %} oui {% endif %}<br><br>
 
                       </td>
                   </tr>

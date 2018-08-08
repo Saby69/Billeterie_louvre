@@ -30,7 +30,7 @@ class TypeTicketValidator extends ConstraintValidator
 
 
         //Contrainte qui vérifie que c'est aujourd'hui, qu'il est plus de 14h et que le type journée à été sélectionné
-        if($visitday < $day && $hour >= "04" && $value == "d") {
+        if($visitday < $day && $hour >= "14" && $value == "d") {
             $this->context->buildViolation($constraint->message)
                 ->addViolation();
 

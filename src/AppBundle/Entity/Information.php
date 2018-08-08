@@ -90,6 +90,29 @@ class Information
     */
     private $booking;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="price_ticket", type="integer", nullable=true)
+     */
+    private $priceTicket;
+
+    /**
+     * @return int
+     */
+    public function getPriceTicket()
+    {
+        return $this->priceTicket;
+    }
+
+    /**
+     * @param int $priceTicket
+     */
+    public function setPriceTicket($priceTicket)
+    {
+        $this->priceTicket = $priceTicket;
+    }
+
 
 
 

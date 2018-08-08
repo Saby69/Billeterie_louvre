@@ -10,7 +10,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Information;
+use AppBundle\Entity\Rate;
 use AppBundle\Form\InformationType;
+use AppBundle\Services\CalculatorService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -26,7 +28,7 @@ class InfosController extends Controller
     /**
      * @Route("/infos", name="infos")
      */
-    public function infosAction(Request $request)
+    public function infosAction(Request $request, CalculatorService $calcul)
     {
 
         $booking = $request->getSession()->get('booking');
@@ -41,15 +43,24 @@ class InfosController extends Controller
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
 
-
                 $em = $this->getDoctrine()->getManager();
                 foreach($informations as $information)
                 {
+
+
+                    $price = $calcul->calculTicket($information);
+
+                    dump($price);
+
+                    $information->setPriceTicket($price);
                     $booking->addInformation($information);
-                    //$em->persist($information);
+
+
+
                 }
                 $em->persist($booking);
                 $em->flush();
+                $this->get('session')->clear();
                 return $this->redirectToRoute('orderdetails', [
                     'id'=>$booking->getId()
                 ]);

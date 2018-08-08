@@ -33,8 +33,7 @@ class NumberMaxTicketsValidator extends ConstraintValidator
 
         //Appel au repository
         $nbticket = $this->em->getRepository('AppBundle:Booking') -> findNumberTicketOneDate($value);
-        dump($value);
-        dump($nbticket);
+
         //Récupération du nombre de place réservés
         $booking = $this->context->getObject();
         $amount = $booking->getAmount();

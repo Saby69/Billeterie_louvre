@@ -81,6 +81,29 @@ class Booking
      */
     private $informations;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="number_order", type="integer", nullable=true)
+     */
+    private $numberOrder;
+
+    /**
+     * @return int
+     */
+    public function getNumberOrder()
+    {
+        return $this->numberOrder;
+    }
+
+    /**
+     * @param int $numberOrder
+     */
+    public function setNumberOrder($numberOrder)
+    {
+        $this->numberOrder = $numberOrder;
+    }
+
 
 
 
