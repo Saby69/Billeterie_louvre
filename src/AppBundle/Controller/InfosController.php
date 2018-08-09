@@ -47,17 +47,20 @@ class InfosController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 foreach($informations as $information)
                 {
-
-
+                    //Calcul du montant de chaque ticket
                     $price = $calcul->calculTicket($information, $booking);
-
-
                     $information->setPriceTicket($price);
+
+                    //Calcul du montant total de la commande
+                    $booking->setTotalPrice($price);
+
                     $booking->addInformation($information);
 
 
-
                 }
+
+
+
                 $string = $number->ramdomNumber(10);
                 $booking->setNumberOrder($string);
                 $em->persist($booking);

@@ -62,9 +62,9 @@ class Booking
     private $mail;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="total_price", type="string", length=255, nullable=true)
+     * @ORM\Column(name="total_price", type="integer", nullable=true)
      */
     private $totalPrice;
 
@@ -217,28 +217,24 @@ class Booking
     }
 
     /**
-     * Set totalPrice
-     *
-     * @param string $totalPrice
-     *
-     * @return Booking
-     */
-    public function setTotalPrice($totalPrice)
-    {
-        $this->totalPrice = $totalPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get totalPrice
-     *
-     * @return string
+     * @return int
      */
     public function getTotalPrice()
     {
         return $this->totalPrice;
     }
+
+    /**
+     * @param \AppBundle\Entity\Information $information
+     *
+     * @return Booking
+     */
+    public function setTotalPrice($priceTicket)
+    {
+        $this->totalPrice += $priceTicket;
+    }
+
+
 
     /**
      * Set stripeTransaction

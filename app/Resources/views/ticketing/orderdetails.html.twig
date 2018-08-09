@@ -21,6 +21,7 @@
             <h1>Récapitulatif de la commande</h1>
             <p>Vous avez réservez {{ booking.amount }} place(s) pour une {% if  booking.type == 'd' %} journée {% else %} demi-journée {%  endif %} pour le {{ booking.date|date("d m Y", "Europe/Paris") }}</p>
             <p>numéro de commande : {{ booking.numberOrder }}</p>
+            <p><strong>Total de votre commande : {{ booking.totalPrice }} €</strong></p>
             {% for b in booking.informations %}
 
               <table>
@@ -29,8 +30,8 @@
                       <td>
                           {{ b.name }} {{ b.firstName }} <br>
                           né(e) le {{ b.birthDate|date("d-m-y", "Europe/Paris") }} <br>
-                          Réduction : {% if b.reducedPrice == '0'%} non {% else %} oui {% endif %}<br><br>
-                          Prix du billet : {{ b.priceTicket }} €
+                          Réduction : {% if b.reducedPrice == '0'%} non {% else %} oui {% endif %}<br>
+                          Prix du billet : {{ b.priceTicket }} €<br><br>
 
                       </td>
                   </tr>

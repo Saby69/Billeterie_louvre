@@ -1,0 +1,55 @@
+<!DO<!DOCTYPE html>
+<htm<html lang="fr">
+<head>
+<hea<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Votre commande sur la billeterie du Louvre</title>
+    <style type="text/css">
+        td {
+            background-color: yellow;
+            color: blue;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+            font-size: 12pt; font-weight: bold;}
+        .logo {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span class='logo'><img src="{{ cid }}" alt="Logo Louvre"></span>
+        <h1>Billeterie du Louvre</h1>
+    </header>
+<p>Bonjour,</p>
+        <p>Nous avons bien reçu votre commande et nous vous en remerçions !</p>
+        <p>Voici le récapitulatif :</p>
+<p>Vous avez réservez {{ booking.amount }} place(s) pour une {% if  booking.type == 'd' %} journée {% else %} demi-journée {%  endif %} pour le {{ booking.date|date("d m Y", "Europe/Paris") }}</p>
+<p>numéro de commande : {{ booking.numberOrder }}</p>
+{% for b in booking.informations %}
+
+    <table>
+
+        <tr>
+            <td>
+                {{ b.name }} {{ b.firstName }} <br>
+                né(e) le {{ b.birthDate|date("d-m-y", "Europe/Paris") }} <br>
+                Réduction : {% if b.reducedPrice == '0'%} non {% else %} oui {% endif %}<br><br>
+
+
+            </td>
+            Prix du billet : {{ b.priceTicket }} €
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                Prix total
+            </td>
+        </tr>
+    </table>
+
+{% endfor %}
+
+</body>
