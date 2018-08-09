@@ -13,6 +13,7 @@ use AppBundle\Entity\Information;
 use AppBundle\Entity\Rate;
 use AppBundle\Form\InformationType;
 use AppBundle\Services\CalculatorService;
+use AppBundle\Services\OrderNumberService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -28,7 +29,7 @@ class InfosController extends Controller
     /**
      * @Route("/infos", name="infos")
      */
-    public function infosAction(Request $request, CalculatorService $calcul)
+    public function infosAction(Request $request, CalculatorService $calcul, OrderNumberService $number)
     {
 
         $booking = $request->getSession()->get('booking');
@@ -48,9 +49,8 @@ class InfosController extends Controller
                 {
 
 
-                    $price = $calcul->calculTicket($information);
+                    $price = $calcul->calculTicket($information, $booking);
 
-                    dump($price);
 
                     $information->setPriceTicket($price);
                     $booking->addInformation($information);
@@ -58,6 +58,8 @@ class InfosController extends Controller
 
 
                 }
+                $string = $number->ramdomNumber(10);
+                $booking->setNumberOrder($string);
                 $em->persist($booking);
                 $em->flush();
                 $this->get('session')->clear();

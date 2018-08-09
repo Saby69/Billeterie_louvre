@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 use AppBundle\Entity\Information;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,14 +35,9 @@ class InformationType extends AbstractType
                     'format' => 'dd MM yyyy',
                  ])
             ->add('reduced_price',
-                ChoiceType::class, array(
-                    'choices' => array(
-                        'Réduction' => true,
-                    ),
-                    'expanded' => true,
-                    'multiple' => true,
+                CheckboxType::class, array(
                     'required' => false,
-                    'label' => ' '
+                    'label' => "J'ai une réduction"
                 ));
 
     }

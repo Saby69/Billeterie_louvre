@@ -82,9 +82,9 @@ class Booking
     private $informations;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="number_order", type="integer", nullable=true)
+     * @ORM\Column(name="number_order", type="string", nullable=true)
      */
     private $numberOrder;
 
