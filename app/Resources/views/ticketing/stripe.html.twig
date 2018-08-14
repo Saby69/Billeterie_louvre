@@ -9,12 +9,13 @@
                     <p>
 
                     Vous êtes sur le point de payer vos billets d'entrées pour le musée du Louvre
-                    <form action="{{ path('order_checkout') }}" method="POST">
+                    <form action="{{ path('payment') }}" method="POST">
                         <script
                                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                 data-key="pk_test_NC7ze8G5MOAacnimgpi36cZP"
-                                data-amount="99500"
-                                data-name="Billetterie du Musée du Louvre"
+                                data-label="Payer"
+                                data-amount="{{ booking.totalPrice*100 }}"
+                                data-name="Billeterie du Musée du Louvre"
                                 data-description="Paiement"
                                 data-locale="auto"
                                 data-currency="eur">

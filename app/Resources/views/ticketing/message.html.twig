@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Récapitulatif de la commande {% endblock %}
+
+
+
+{% block body %}
+
+
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <h1>Succès</h1>
+
+
+                {# ...or you can read and display every flash message available #}
+                {% for message in app.flashes('success', 'error') %}
+                <div class="flash-notice">
+
+                        <div class="flash">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+

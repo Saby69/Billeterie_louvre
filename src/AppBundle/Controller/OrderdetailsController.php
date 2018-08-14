@@ -11,8 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Booking;
 
-use AppBundle\Entity\Information;
-use AppBundle\Services\CalculatorService;
+
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -34,7 +33,7 @@ class OrderdetailsController extends Controller
 
 
         return $this->render('ticketing/orderdetails.html.twig', [
-            'booking' => $booking
+            'booking' => $booking, 'id' =>$booking->getId()
         ]);
     }
 

@@ -30,7 +30,6 @@ class IndexController extends Controller
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
-        dump($form->getData());
         if ($form->isSubmitted() && $form->isValid()) {
             $session->set('booking', $booking);
             return $this->redirectToRoute('infos');

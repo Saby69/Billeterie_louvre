@@ -56,16 +56,13 @@ class InfosController extends Controller
 
                     $booking->addInformation($information);
 
-
                 }
-
-
 
                 $string = $number->ramdomNumber(10);
                 $booking->setNumberOrder($string);
                 $em->persist($booking);
                 $em->flush();
-                $this->get('session')->clear();
+                //$this->get('session')->clear();
                 return $this->redirectToRoute('orderdetails', [
                     'id'=>$booking->getId()
                 ]);
