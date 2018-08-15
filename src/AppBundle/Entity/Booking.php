@@ -64,16 +64,16 @@ class Booking
     /**
      * @var int
      *
-     * @ORM\Column(name="total_price", type="integer", nullable=true)
+     * @ORM\Column(name="total_price", type="integer")
      */
     private $totalPrice;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="stripe_transaction", type="string", length=255, nullable=true)
+     * @ORM\Column(name="paid", type="boolean", nullable=true)
      */
-    private $stripeTransaction;
+    private $paid;
 
 
     /**
@@ -84,7 +84,7 @@ class Booking
     /**
      * @var string
      *
-     * @ORM\Column(name="number_order", type="string", nullable=true)
+     * @ORM\Column(name="number_order", type="string")
      */
     private $numberOrder;
 
@@ -234,31 +234,25 @@ class Booking
         $this->totalPrice += $priceTicket;
     }
 
-
-
     /**
-     * Set stripeTransaction
-     *
-     * @param string $stripeTransaction
-     *
-     * @return Booking
+     * @return bool
      */
-    public function setStripeTransaction($stripeTransaction)
+    public function isPaid()
     {
-        $this->stripeTransaction = $stripeTransaction;
-
-        return $this;
+        return $this->paid;
     }
 
     /**
-     * Get stripeTransaction
-     *
-     * @return string
+     * @param bool $paid
      */
-    public function getStripeTransaction()
+    public function setPaid($paid)
     {
-        return $this->stripeTransaction;
+        $this->paid = $paid;
     }
+
+
+
+
 
     /**
      * @param mixed $informations

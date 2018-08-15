@@ -9,22 +9,31 @@
 namespace AppBundle\Services;
 
 
-class MailService
+class MailService extends \Twig_Extension
 {
-    public function mailSend()
+
+    private $mailer;
+    private $twig;
+
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig)
+    {
+        $this->mailer=$mailer;
+        $this->twig=$twig;
+    }
+
+
+    public function mailSend($booking)
     {
 
         $message = (new \Swift_Message('Votre commande sur la billeterie du Louvre est validée'))
             ->setFrom('scarruezco@gmail.com')
-            ->setTo('skru@kaleys.fr')
-            ->setBody('test symfony'
-                /*$this->render(
-                // app/Resources/views/Emails/registration.html.twig
-                    'ticketing/confirmation_order_mail.html.twig'
+            ->setTo('scarruezco@gmail.com')
+            ->setBody(
 
-                )*/,
-                'text/html'
-            )
+                $this->twig->render('ticketing/confirmation_order_mail.html.twig', [
+                    "booking" => $booking, 'id' => $booking->getId()
+                ]),
+                'text/html')
             /*
              * If you also want to include a plaintext version of the message
             ->addPart(
@@ -37,11 +46,7 @@ class MailService
             */
         ;
 
-        //$mailer->send($message);
+        $this->mailer->send($message);
 
-        // or, you can also fetch the mailer service this way
-         $this->get('mailer')->send($message);
-
-        //return $this->render(...);
     }
 }

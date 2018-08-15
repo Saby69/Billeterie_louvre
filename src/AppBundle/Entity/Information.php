@@ -93,7 +93,7 @@ class Information
     /**
      * @var integer
      *
-     * @ORM\Column(name="price_ticket", type="integer", nullable=true)
+     * @ORM\Column(name="price_ticket", type="integer")
      */
     private $priceTicket;
 
