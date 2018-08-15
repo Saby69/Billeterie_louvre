@@ -2,26 +2,27 @@
 /**
  * Created by PhpStorm.
  * User: Sabrina
- * Date: 09/08/2018
- * Time: 12:30
+ * Date: 14/08/2018
+ * Time: 08:43
  */
 
-namespace AppBundle\Controller;
+namespace AppBundle\Services;
 
 
-class MailController
+class MailService
 {
-    public function indexAction($mail, \Swift_Mailer $mailer)
+    public function mailSend()
     {
+
         $message = (new \Swift_Message('Votre commande sur la billeterie du Louvre est validée'))
             ->setFrom('scarruezco@gmail.com')
-            ->setTo($mail)
-            ->setBody(
-                $this->renderView(
+            ->setTo('skru@kaleys.fr')
+            ->setBody('test symfony'
+                /*$this->render(
                 // app/Resources/views/Emails/registration.html.twig
                     'ticketing/confirmation_order_mail.html.twig'
 
-                ),
+                )*/,
                 'text/html'
             )
             /*
@@ -36,10 +37,10 @@ class MailController
             */
         ;
 
-        $mailer->send($message);
+        //$mailer->send($message);
 
         // or, you can also fetch the mailer service this way
-        // $this->get('mailer')->send($message);
+         $this->get('mailer')->send($message);
 
         //return $this->render(...);
     }

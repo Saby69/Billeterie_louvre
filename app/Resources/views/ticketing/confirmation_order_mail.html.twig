@@ -1,55 +1,77 @@
-<!DO<!DOCTYPE html>
-<htm<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-<hea<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Votre commande sur la billeterie du Louvre</title>
     <style type="text/css">
-        td {
-            background-color: yellow;
-            color: blue;
+        body {
             font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
-            font-size: 12pt; font-weight: bold;}
+            font-size: 12pt;
+        }
+        header{
+            background-color: purple;
+            padding: 20px;
+        }
+        h1{
+            color: white;
+        }
+        .tableau {
+            background-color: dimgrey;
+            color: white;
+        }
         .logo {
             text-align: center;
         }
     </style>
 </head>
 <body>
+
     <header>
-        <span class='logo'><img src="{{ cid }}" alt="Logo Louvre"></span>
-        <h1>Billeterie du Louvre</h1>
+       <table align="center" width="600px">
+           <tr>
+               <td><span class='logo'><img src="{{ absolute_url(asset('img/logo-louvre.jpg')) }}"></span></td>
+           </tr>
+           <tr>
+               <td><h1>Billeterie du Louvre</h1></td>
+           </tr>
+       </table>
     </header>
-<p>Bonjour,</p>
-        <p>Nous avons bien reçu votre commande et nous vous en remerçions !</p>
-        <p>Voici le récapitulatif :</p>
-<p>Vous avez réservez {{ booking.amount }} place(s) pour une {% if  booking.type == 'd' %} journée {% else %} demi-journée {%  endif %} pour le {{ booking.date|date("d m Y", "Europe/Paris") }}</p>
-<p>numéro de commande : {{ booking.numberOrder }}</p>
-{% for b in booking.informations %}
-
-    <table>
-
-        <tr>
-            <td>
-                {{ b.name }} {{ b.firstName }} <br>
-                né(e) le {{ b.birthDate|date("d-m-y", "Europe/Paris") }} <br>
-                Réduction : {% if b.reducedPrice == '0'%} non {% else %} oui {% endif %}<br><br>
 
 
-            </td>
-            Prix du billet : {{ b.priceTicket }} €
-            <td>
+        <table align="center" width="600px" border="0">
+            <tr>
+                <td style="padding: 20px;">
+                    <p>Bonjour,<br>
+                    Nous avons bien reçu votre commande et nous vous en remerçions !<br>
+                    Voici le récapitulatif de votre commande <strong>n°{{ booking.numberOrder }} </strong>:<br></p>
+                    <p>Vous avez réservez {{ booking.amount }} place(s) pour une {% if  booking.type == 'd' %} journée {% else %} demi-journée {%  endif %} pour le {{ booking.date|date("d m Y", "Europe/Paris") }}.<br>
+                </td>
+            </tr>
+        </table>
 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                Prix total
-            </td>
-        </tr>
-    </table>
+        <table align="center" width="600px" border="0">
+        {% for b in booking.informations %}
+            <tr class="tableau">
+                <td style="padding: 20px;">
+                    <span style="font-weight: bold;">{{ b.name }} {{ b.firstName }} </span><br>
+                    né(e) le {{ b.birthDate|date("d-m-y", "Europe/Paris") }} <br>
+                    Réduction : {% if b.reducedPrice == '0'%} non {% else %} oui {% endif %}<br>
+                </td>
+                <td style="padding: 20px;">
+                    Prix du billet : {{ b.priceTicket }} €
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td class="tableau" style="padding: 20px;">
+                    <span style="font-weight: bold; font-size: 14pt;">Prix total : {{ booking.totalPrice }} €</span>
+                </td>
+            </tr>
+        </table>
 
-{% endfor %}
 
-</body>
+
+    </body>
+</html>

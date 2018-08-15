@@ -10,7 +10,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Information;
-use AppBundle\Entity\Rate;
 use AppBundle\Form\InformationType;
 use AppBundle\Services\CalculatorService;
 use AppBundle\Services\OrderNumberService;
@@ -62,7 +61,7 @@ class InfosController extends Controller
                 $booking->setNumberOrder($string);
                 $em->persist($booking);
                 $em->flush();
-                //$this->get('session')->clear();
+                $this->get('session')->clear();
                 return $this->redirectToRoute('orderdetails', [
                     'id'=>$booking->getId()
                 ]);

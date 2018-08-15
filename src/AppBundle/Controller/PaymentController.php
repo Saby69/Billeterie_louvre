@@ -12,8 +12,6 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Booking;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -55,6 +53,31 @@ class PaymentController extends Controller
                 "description" => "Paiement Stripe - OpenClassrooms Exemple"
             ));
             $this->addFlash("success","Votre paiement a été accepté, vous allez recevoir un mail de confirmation !");
+            $mailer = $this->get('mailer');
+
+
+            $message = (new \Swift_Message('Votre commande sur la billeterie du Louvre est validée'))
+                ->setFrom('scarruezco@gmail.com')
+                ->setTo('scarruezco@gmail.com')
+                ->setBody(
+
+                    $this->renderView('ticketing/confirmation_order_mail.html.twig', [
+                        "booking" => $booking, 'id' => $booking->getId()
+                    ]),
+                    'text/html')
+                /*
+                 * If you also want to include a plaintext version of the message
+                ->addPart(
+                    $this->renderView(
+                        'Emails/registration.txt.twig',
+                        array('name' => $name)
+                    ),
+                    'text/plain'
+                )
+                */
+            ;
+
+            $mailer->send($message);
             return $this->redirectToRoute("message",[
                 "id"=>$booking->getId()
             ]);
@@ -80,5 +103,7 @@ class PaymentController extends Controller
 
 
     }
+
+
 }
 

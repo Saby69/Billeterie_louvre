@@ -33,7 +33,7 @@ class OrderdetailsController extends Controller
 
 
         return $this->render('ticketing/orderdetails.html.twig', [
-            'booking' => $booking, 'id' =>$booking->getId()
+            'booking' => $booking, 'id' => $booking->getId()
         ]);
     }
 
