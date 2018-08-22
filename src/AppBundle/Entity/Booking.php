@@ -105,11 +105,6 @@ class Booking
     }
 
 
-
-
-
-
-
     /**
      * Get id
      *

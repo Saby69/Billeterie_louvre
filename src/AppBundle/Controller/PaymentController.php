@@ -43,6 +43,12 @@ class PaymentController extends Controller
 
             $paymentstripe->paymentService($booking);
 
+            $em = $this->getDoctrine()->getManager();
+            $booking->setPaid(true);
+
+            $em->persist($booking);
+            $em->flush();
+
             $this->addFlash("success","Votre paiement a été accepté, vous allez recevoir un mail de confirmation !");
             $mailService->mailSend($booking);
 
