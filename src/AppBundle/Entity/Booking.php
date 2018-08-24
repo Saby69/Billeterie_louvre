@@ -71,9 +71,9 @@ class Booking
     /**
      * @var boolean
      *
-     * @ORM\Column(name="paid", type="boolean", nullable=true)
+     * @ORM\Column(name="paid", type="boolean")
      */
-    private $paid;
+    private $paid = false;
 
 
     /**

@@ -45,8 +45,6 @@ class PaymentController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $booking->setPaid(true);
-
-            $em->persist($booking);
             $em->flush();
 
             $this->addFlash("success","Votre paiement a été accepté, vous allez recevoir un mail de confirmation !");

@@ -10,11 +10,6 @@ namespace AppBundle\Services;
 
 
 
-
-use AppBundle\Entity\Booking;
-use Symfony\Component\Routing\Annotation\Route;
-
-
 class PaymentstripeService
 {
     public function paymentService($booking)

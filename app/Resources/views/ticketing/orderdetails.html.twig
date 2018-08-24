@@ -13,7 +13,7 @@
     <div class="row">
 
         <div class="col-lg-8 col-md-10 mx-auto">
-            <h1>Récapitulatif de la commande</h1>
+            <h2>Récapitulatif de la commande</h2>
             <p>Vous avez réservez {{ booking.amount }} place(s) pour une {% if  booking.type == 'd' %} journée {% else %} demi-journée {%  endif %} pour le {{ booking.date|date("d m Y", "Europe/Paris") }}</p>
             <p>numéro de commande : {{ booking.numberOrder }}</p>
             <p><strong>Total de votre commande : {{ booking.totalPrice }} €</strong></p>
