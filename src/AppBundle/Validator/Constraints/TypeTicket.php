@@ -17,5 +17,4 @@ class typeTicket extends Constraint
 {
      public $message = 'Au dela de 14h, vous ne pouvez plus commander de billet pour la journée';
 
-
 }
