@@ -21,11 +21,11 @@ class OrderdetailsControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/orderdetails');
-        //$client->followRedirect();
+        dump($crawler);
 
 
         //Assertion balise h1
-        $this->assertEquals(1, $crawler->filter('h1')->count());
+        $this->assertEquals(2, $crawler->filter('h1')->count());
 
         //Assertion Statut
 

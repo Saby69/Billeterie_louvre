@@ -33,10 +33,14 @@ class OrderdetailsController extends Controller
         if ($booking->isPaid()== true) {
             throw new AccessDeniedHttpException('Vous ne pouvez pas accéder à cette page');
         }
+        else {
+
+
 
         return $this->render('ticketing/orderdetails.html.twig', [
             'booking' => $booking, 'id' => $booking->getId()
         ]);
+        }
     }
 
 

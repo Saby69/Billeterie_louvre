@@ -40,7 +40,7 @@ class Booking
      *
      * @ORM\Column(name="type", type="string", length=255)
      * @Assert\NotBlank(message = "Veuillez choisir si vous souhaitez une entrée pour la journée ou la demi-journée !")
-     * @BookingAssert\TypeTicket()
+     * @BookingAssert\typeTicket()
      */
     private $type;
 

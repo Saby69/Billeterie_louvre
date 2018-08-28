@@ -18,6 +18,7 @@ class InfosControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/infos');
         $client->followRedirect();
+        dump($crawler);
 
 
 
