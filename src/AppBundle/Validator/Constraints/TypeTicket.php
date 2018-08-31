@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class typeTicket extends Constraint
+class TypeTicket extends Constraint
 {
      public $message = 'Au dela de 14h, vous ne pouvez plus commander de billet pour la journée';
 
