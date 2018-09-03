@@ -93,6 +93,7 @@ class CalculatorService
             }
 
         }
+
         return $ticketRate;
 
     }

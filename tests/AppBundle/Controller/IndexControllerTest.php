@@ -25,6 +25,24 @@ class IndexControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('h1')->count());
     }
 
+    public function testBookingForm()
+    {
+        $client = static::createClient();
 
+        $crawler = $client->request('GET', '/');
+
+        $form = $crawler->selectButton('Suivant')->form();
+
+        $crawler = $client->submit($form, array(
+            'app_bundle_ticket_form_type[date]' => '08/09/2018',
+            'app_bundle_ticket_form_type[type]' => 'd',
+            'app_bundle_ticket_form_type[amount]' => 1,
+            'app_bundle_ticket_form_type[mail]' => 'test@toto.com'
+        ));
+        $crawler = $client->followRedirect();
+        $this->assertSame(1, $crawler->filter('h2:contains("Vos informations")')->count());
+
+
+    }
 
 }

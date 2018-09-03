@@ -7,6 +7,7 @@
  */
 
 namespace Tests\AppBundle\Controller;
+use AppBundle\Entity\Booking;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 
@@ -20,6 +21,28 @@ class InfosControllerTest extends WebTestCase
         $client->request('GET', '/infos');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+    }
+
+    public function testUrlIfBookingValid()
+    {
+        $client = static::createClient();
+
+        $booking = new Booking();
+        $booking->setAmount(1);
+        $booking->setDate(new \DateTime());
+        $booking->setType('d');
+        $booking->setMail('toto@toto.fr');
+
+        $session = $client->getContainer()->get('session');
+        $session->set('booking', $booking);
+
+
+        $crawler = $client->request('GET', '/infos');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+
 
     }
 
