@@ -14,3 +14,10 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: false
+
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: '%kernel.project_dir%/var/test.db3'
+

@@ -20,7 +20,7 @@ class OrderdetailsControllerTest extends WebTestCase
         $client = static::createClient();
 
 
-        $crawler = $client->request('GET', '/orderdetails/2');
+        $crawler = $client->request('GET', '/orderdetails/6');
 
 
         $this->assertEquals(1, $crawler->filter('h1')->count());
@@ -32,7 +32,7 @@ class OrderdetailsControllerTest extends WebTestCase
         $client = static::createClient();
 
 
-        $client->request('GET', '/orderdetails/2');
+        $client->request('GET', '/orderdetails/6');
 
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -44,7 +44,7 @@ class OrderdetailsControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/orderdetails/1');
+        $client->request('GET', '/orderdetails/5');
 
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
 

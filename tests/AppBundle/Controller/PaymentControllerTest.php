@@ -15,7 +15,7 @@ class PaymentControllerTest extends WebTestCase
     public function testIsPaid()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/message/1');
+        $crawler = $client->request('GET', '/message/5');
 
         //Assertion Statut
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -27,7 +27,7 @@ class PaymentControllerTest extends WebTestCase
     public function testIsNotPaid()
     {
         $client = static::createClient();
-        $client->request('GET', '/message/2');
+        $client->request('GET', '/message/6');
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
 
     }
