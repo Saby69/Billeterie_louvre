@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
-class OrderdetailsController extends Controller
+class OrderDetailsController extends Controller
 {
 
 
