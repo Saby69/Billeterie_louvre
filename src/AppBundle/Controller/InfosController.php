@@ -21,16 +21,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class InfosController extends Controller
 {
-
-
-
-
     /**
      * @Route("/infos", name="infos")
      */
     public function infosAction(Request $request, CalculatorService $calcul, OrderNumberService $number)
     {
-
         $booking = $request->getSession()->get('booking');
 
         if(!empty($booking)) {
@@ -39,7 +34,6 @@ class InfosController extends Controller
                 $informations[] = new Information();
             }
             $form = $this->createForm(CollectionType::class, $informations, ['entry_type'=>InformationType::class]);
-
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
 
@@ -50,11 +44,11 @@ class InfosController extends Controller
                     $price = $calcul->calculTicket($information, $booking);
                     $information->setPriceTicket($price);
 
+
                     //Calcul du montant total de la commande
                     $booking->setTotalPrice($price);
 
                     $booking->addInformation($information);
-
                 }
 
                 $string = $number->ramdomNumber(10);
@@ -73,7 +67,5 @@ class InfosController extends Controller
         return $this->redirectToRoute("index");
 
     }
-
-
 }
 
