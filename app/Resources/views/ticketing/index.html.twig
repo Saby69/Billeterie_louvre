@@ -12,8 +12,8 @@
 
     <!-- Main Content -->
     <div class="container">
-        <h2>Billet d'entrée</h2>
-        <p>Veuillez remplir le formulaire ci-dessous</p>
+        <h2>Billet(s) pour le Musée du Louvre</h2><br>
+        <p></p> Votre E-billet vous permettra d'avoir un accès rapide au Louvre ainsi qu'à toutes les expositions.</p>
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 {{ form_start(ticketForm) }}
@@ -22,9 +22,10 @@
                     {{ form_row(ticketForm.amount) }}
                     {{ form_row(ticketForm.mail) }}
 
-                    <button type="submit" class="btn btn-success">Suivant</button>
+                    <button type="submit" class="btn btn-outline-info">Suivant</button>
                 {{ form_end(ticketForm) }}
             </div>
+        </div>
 
     </div>
 

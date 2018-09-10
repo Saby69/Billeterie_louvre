@@ -10,9 +10,11 @@
 
     <!-- Main Content -->
     <div class="container">
+        <h2>Vos informations</h2><br>
+        <p>Nous allons procéder au calcul automatique de vos billets.</p>
+        <p>Il vous sera demandé de présenter votre carte d’étudiant, militaire ou équivalent pour bénéficier du tarif réduit.</p>
         <div class="row">
-            <h2>Vos informations</h2>
-            <p>Veuillez remplir le(s) champ(s) ci-dessous afin de procéder au calcul du montant de votre commande</p>
+
             <div class="col-lg-8 col-md-10 mx-auto">
 
 
@@ -25,22 +27,24 @@
                         <tr>
                             <td>
                                 {{ form_widget(information) }}
+                                <hr WIDTH="100%" SIZE="2" ALIGN="left" color="purple" size="12px">
                             </td>
 
                         </tr>
                         </table>
-                        <hr WIDTH="50%" SIZE="2" ALIGN="left" color="pink">
+
 
 
                     {%  endfor %}
 
 
-                    <button type="submit" class="btn btn-success">Valider</button>
+                    <button type="submit" class="btn btn-outline-info">Valider</button>
                 {{ form_end(ticketForm) }}
             </div>
 
         </div>
     </div>
+    <hr>
 
 {% endblock %}
 

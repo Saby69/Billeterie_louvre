@@ -13,20 +13,21 @@
     <div class="row">
 
         <div class="col-lg-8 col-md-10 mx-auto">
-            <h2>Récapitulatif de la commande</h2>
-            <p>Vous avez réservez {{ booking.amount }} place(s) pour une {% if  booking.type == 'd' %} journée {% else %} demi-journée {%  endif %} pour le {{ booking.date|date("d m Y", "Europe/Paris") }}</p>
-            <p>numéro de commande : {{ booking.numberOrder }}</p>
-            <p><strong>Total de votre commande : {{ booking.totalPrice }} €</strong></p>
+            <h2>Récapitulatif de la commande</h2><br>
+            <h5>Vous avez réservez {{ booking.amount }} place(s) pour une {% if  booking.type == 'd' %} journée {% else %} demi-journée {%  endif %} pour le {{ booking.date|date("d-m-Y", "Europe/Paris") }}</h5>
+            <p><strong>Numéro de commande :</strong> {{ booking.numberOrder }}<br>
+            <strong>Total de votre commande : </strong>{{ booking.totalPrice }} €</p>
             {% for b in booking.informations %}
 
               <table>
 
                   <tr>
                       <td>
-                          {{ b.name }} {{ b.firstName }} <br>
-                          né(e) le {{ b.birthDate|date("d-m-y", "Europe/Paris") }} <br>
-                          Réduction : {% if b.reducedPrice == '0'%} non {% else %} oui {% endif %}<br>
-                          Prix du billet : {{ b.priceTicket }} €<br><br>
+                          <strong>{{ b.name }}</strong> {{ b.firstName }} <br>
+                          <strong>né(e) le </strong>{{ b.birthDate|date("d-m-y", "Europe/Paris") }} <br>
+                          <strong>Réduction :</strong> {% if b.reducedPrice == '0'%} non {% else %} oui<br><span class = "alerttr">Il vous sera demandé de présenter votre carte d’étudiant, militaire ou équivalent pour bénéficier du tarif réduit.</span> {% endif %}<br>
+                          <strong>Prix du billet :</strong> {{ b.priceTicket }} €<br>
+                          <hr WIDTH="100%" SIZE="2" ALIGN="left" color="purple" size="12px"><br>
 
                       </td>
                   </tr>
@@ -58,7 +59,7 @@
     </div>
 </div>
 
-
+<hr>
 
     {% endblock %}
 
