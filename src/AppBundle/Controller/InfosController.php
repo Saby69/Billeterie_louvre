@@ -10,9 +10,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Information;
+use AppBundle\Form\Handlers\InfosHandler;
 use AppBundle\Form\InformationType;
-use AppBundle\Services\CalculatorService;
-use AppBundle\Services\OrderNumberService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -24,48 +23,43 @@ class InfosController extends Controller
     /**
      * @Route("/infos", name="infos")
      */
-    public function infosAction(Request $request, CalculatorService $calcul, OrderNumberService $number)
+    public function infosAction(Request $request, InfosHandler $infosHandler)
     {
         $booking = $request->getSession()->get('booking');
+        if (!empty($booking)) {
+            $informations = $infosHandler->NumberFormInformation($booking);
 
-        if(!empty($booking)) {
-            $amount = $booking->getAmount();
-            for($i=1; $i<= $amount; $i++) {
-                $informations[] = new Information();
-            }
             $form = $this->createForm(CollectionType::class, $informations, ['entry_type'=>InformationType::class]);
             $form->handleRequest($request);
+
+
             if ($form->isSubmitted() && $form->isValid()) {
 
-                $em = $this->getDoctrine()->getManager();
-                foreach($informations as $information)
-                {
-                    //Calcul du montant de chaque ticket
-                    $price = $calcul->calculTicket($information, $booking);
-                    $information->setPriceTicket($price);
+                   $infosHandler->infos($booking, $informations);
 
 
-                    //Calcul du montant total de la commande
-                    $booking->setTotalPrice($price);
-
-                    $booking->addInformation($information);
-                }
-
-                $string = $number->ramdomNumber(10);
-                $booking->setNumberOrder($string);
-                $em->persist($booking);
-                $em->flush();
                 $this->get('session')->clear();
-                return $this->redirectToRoute('orderdetails', [
-                    'id'=>$booking->getId()
-                ]);
-            }
-            return $this->render('ticketing/form_information.html.twig', [
-                'booking' => $booking, 'ticketForm' => $form->createView()
-            ]);
-        }
-        return $this->redirectToRoute("index");
 
-    }
+                $total = $booking->getTotalPrice();
+                if ($total>0) {
+                    return $this->redirectToRoute('orderdetails', [
+                        'id' => $booking->getId()
+                    ]);
+                }
+                else{
+                    return $this->redirectToRoute('orderdetailsfree', [
+                        'id' => $booking->getId()
+                    ]);
+
+                }
+            }
+        }
+
+        return $this->render('ticketing/form_information.html.twig', [
+            'booking' => $booking, 'ticketForm' => $form->createView()
+        ]);
+        }
+
+
 }
 

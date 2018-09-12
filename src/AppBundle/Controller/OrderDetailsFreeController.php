@@ -13,18 +13,20 @@ use AppBundle\Entity\Booking;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Services\MailService;
 
 
-class OrderDetailsController extends Controller
+
+class OrderDetailsFreeController extends Controller
 {
 
 
 
 
     /**
-     * @Route("/orderdetails/{id}", name="orderdetails")
+     * @Route("/orderdetailsfree/{id}", name="orderdetailsfree")
      */
-    public function orderdetailsAction(Booking $booking)
+    public function orderdetailsAction(Booking $booking, MailService $mailService)
     {
 
         $booking->getInformations();
@@ -33,11 +35,13 @@ class OrderDetailsController extends Controller
         }
         else {
 
-
-
-        return $this->render('ticketing/orderdetails.html.twig', [
-            'booking' => $booking, 'id' => $booking->getId()
-        ]);
+            $em = $this->getDoctrine()->getManager();
+            $booking->setPaid(true);
+            $em->flush();
+            $mailService->mailSend($booking);
+            return $this->render('ticketing/orderdetailsfree.html.twig', [
+                'booking' => $booking, 'id' => $booking->getId()
+            ]);
         }
     }
 

@@ -14,6 +14,7 @@ class PaymentstripeService
 {
     public function paymentService($booking)
     {
+
         \Stripe\Stripe::setApiKey("sk_test_yazSA0Tml2VVTtpQGmemCx9x");
 
         // Get the credit card details submitted by the form
