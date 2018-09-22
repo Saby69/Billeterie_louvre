@@ -9,6 +9,8 @@
 namespace AppBundle\Services;
 
 
+use AppBundle\Entity\Booking;
+
 class MailService extends \Twig_Extension
 {
 
@@ -22,12 +24,12 @@ class MailService extends \Twig_Extension
     }
 
 
-    public function mailSend($booking)
+    public function mailSend(Booking $booking)
     {
 
         $message = (new \Swift_Message('Votre commande sur la billeterie du Louvre est validée'))
             ->setFrom('scarruezco@gmail.com')
-            ->setTo('scarruezco@gmail.com')
+            ->setTo($booking->getMail())
             ->setBody(
 
                 $this->twig->render('ticketing/confirmation_order_mail.html.twig', [

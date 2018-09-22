@@ -14,15 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class InfosControllerTest extends WebTestCase
 {
 
-    public function testUrlIfFormEmpty()
-    {
-        $client = static::createClient();
 
-        $client->request('GET', '/infos');
-
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-
-    }
 
     public function testUrlIfBookingValid()
     {
@@ -38,7 +30,7 @@ class InfosControllerTest extends WebTestCase
         $session->set('booking', $booking);
 
 
-        $crawler = $client->request('GET', '/infos');
+        $client->request('GET', '/infos');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 

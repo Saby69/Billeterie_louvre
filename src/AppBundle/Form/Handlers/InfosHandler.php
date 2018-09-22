@@ -43,9 +43,7 @@ class InfosHandler
         foreach ($informations as $information)
         {
 
-            //$em = $this->objectManager;
             //Calcul du montant de chaque ticket
-            //$calculatorService = new CalculatorService($em);
             $price = $this->calculatorService->calculTicket($information, $booking);
             $information->setPriceTicket($price);
 
@@ -53,7 +51,10 @@ class InfosHandler
             $booking->setTotalPrice($price);
 
             $booking->addInformation($information);
+
+            //Génération d'un numéro de commande alphanumérique
             $string = $this->orderNumberService->ramdomNumber(10);
+
             $booking->setNumberOrder($string);
             $this->objectManager->persist($booking);
             $this->objectManager->flush();

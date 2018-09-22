@@ -9,7 +9,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Information;
 use AppBundle\Form\Handlers\InfosHandler;
 use AppBundle\Form\InformationType;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,14 +28,13 @@ class InfosController extends Controller
         if (!empty($booking)) {
             $informations = $infosHandler->NumberFormInformation($booking);
 
+            //Création du formulaire
             $form = $this->createForm(CollectionType::class, $informations, ['entry_type'=>InformationType::class]);
             $form->handleRequest($request);
 
-
             if ($form->isSubmitted() && $form->isValid()) {
-
-                   $infosHandler->infos($booking, $informations);
-
+                    //appel au service InfosHandler qui gère le calcul des tickets + la génération d'un numéro de commande
+                    $infosHandler->infos($booking, $informations);
 
                 $this->get('session')->clear();
 
@@ -50,16 +48,12 @@ class InfosController extends Controller
                     return $this->redirectToRoute('orderdetailsfree', [
                         'id' => $booking->getId()
                     ]);
-
                 }
             }
         }
-
         return $this->render('ticketing/form_information.html.twig', [
             'booking' => $booking, 'ticketForm' => $form->createView()
         ]);
         }
-
-
 }
 
